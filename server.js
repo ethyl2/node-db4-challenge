@@ -4,11 +4,15 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 
+const RecipesRouter = require('./recipes/recipes-router.js');
+
 const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use(morgan('tiny'));
 server.use(cors());
+
+server.use('/api/recipes', RecipesRouter);
 
 const port =  process.env.PORT || 9000;
 
