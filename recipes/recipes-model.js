@@ -12,7 +12,10 @@ function getRecipes() {
 }
 
 function getShoppingList(recipe_id) {
-
+    return db('recipe_requirements as rr')
+        .join('ingredients', 'ingredients.id', 'rr.ingredient_id')
+        .where({'rr.recipe_id': recipe_id})
+        .select('ingredients.name', 'rr.quantity', 'rr.unit');
 }
 
 function getInstructions(recipe_id) {
