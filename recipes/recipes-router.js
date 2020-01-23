@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id/shoppingList', (req, res) => {
     const id = req.params.id;
     Recipes.getShoppingList(id)
         .then(response => {
@@ -22,6 +22,17 @@ router.get('/:id', (req, res) => {
         .catch(err => {
             //console.log(err);
             res.status(500).json({error: err, message: `Failed to retrieve shopping list for recipe with id ${id}`})
+        });
+});
+
+router.get('/:id/instructions', (req, res) => {
+    const id = req.params.id;
+    Recipes.getInstructions(id)
+        .then(response => {
+            res.status(200).json(response);
+        })
+        .catch(err => {
+            res.status(500).json({error: err, message: `Failed to retrieve instructions for recipe with id ${id}`});
         });
 });
 
